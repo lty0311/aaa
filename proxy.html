@@ -1,33 +1,34 @@
 <script src="https://cdn.jsdelivr.net/jquery/2.0.0/jquery-2.0.0.min.js"></script>
 <script>
-  function run(data){
-    $.ajax( {
-	type : data.type,
-	url : data.url,
-	data : data.param,
-	dataType : "json",
-	timeout : 30000,
-	success : function(jsontext) {
-	    window.parent.postMessage({
-	        data: jsontext, CallBackFn: data.CallBackFn
-	    }, '*');
-	},
-	error : function() {
-	    window.parent.postMessage({
-	        data: {}, CallBackFn: data.CallBackFn
-	    }, '*');
-	}
-} );
+  // 中转代理页
+  function run(data) {
+    $.ajax({
+      type: data.type,
+      url: data.url,
+      data: data.param,
+      dataType: "json",
+      timeout: 30000,
+      success: function (jsontext) {
+        window.parent.postMessage({
+          data: jsontext,
+          CallBackFn: data.CallBackFn
+        }, '*');
+      },
+      error: function () {
+        window.parent.postMessage({
+          data: {},
+          CallBackFn: data.CallBackFn
+        }, '*');
+      }
+    });
   }
-  
-  // 注册消息事件监听
-   window.addEventListener('message', function(e){ 
-     // 对来自 主页 框架的消息进行处理 并向父窗框返回响应结果 
-     if (e.data.type == 'ajax' && typeof e.data.ajaxobject == 'object') {
-       console.log(e.data.ajaxobject);
-       run(e.data.ajaxobject);
-     }    
-   }, false); 
 
-  
+  // 注册消息事件监听
+  window.addEventListener('message', function (e) {
+    // 对来自 主页 框架的消息进行处理 并向父窗框返回响应结果
+    if (e.data.type == 'ajax' && typeof e.data.ajaxobject == 'object') {
+      run(e.data.ajaxobject);
+    }
+  }, false);
+
 </script>
