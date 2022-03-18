@@ -7,8 +7,12 @@
     alert(v);
   }
   
-  setInterval(function(){
-    console.log(window.location.href);
-    console.log(window.name);
-  },1000);
+  // 注册消息事件监听，对来自 myIframe 框架的消息进行处理
+window.addEventListener('message', function(e){
+    // 向父窗框返回响应结果
+    window.parent.postMessage({ 
+        act: 'response', 
+        msg: '我接收到啦！' + + new Date()
+    }, '*');
+}, false);
 </script>
