@@ -2,22 +2,22 @@
 <script>
   function run(data){
     $.ajax( {
-			type : data.type,
-			url : data.url,
-			data : data.param,
-			dataType : "json",
-			timeout : 30000,
-			success : function(data) {
-				window.parent.postMessage({
-          data: data
-        }, '*');
-			},
-			error : function() {
-				window.parent.postMessage({
-          data: {}
-        }, '*');
-			}
-		} );
+	type : data.type,
+	url : data.url,
+	data : data.param,
+	dataType : "json",
+	timeout : 30000,
+	success : function(jsontext) {
+	    window.parent.postMessage({
+	        data: jsontext, CallBackFn: data.CallBackFn
+	    }, '*');
+	},
+	error : function() {
+	    window.parent.postMessage({
+	        data: {}, CallBackFn: data.CallBackFn
+	    }, '*');
+	}
+} );
   }
   
   // 注册消息事件监听
