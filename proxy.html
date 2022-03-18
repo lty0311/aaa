@@ -11,7 +11,7 @@
   // 注册消息事件监听
    window.addEventListener('message', function(e){ 
      // 对来自 主页 框架的消息进行处理 并向父窗框返回响应结果 
-     if (typeof e.data.type == 'ajax') {
+     if (e.data.type == 'ajax' && typeof e.data.ajaxobject == 'object') {
        run(e.data.ajaxobject);
      }    
    }, false); 
