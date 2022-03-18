@@ -1,11 +1,23 @@
 <script src="https://cdn.jsdelivr.net/jquery/2.0.0/jquery-2.0.0.min.js"></script>
 <script>
   function run(data){
-    $.post(data.url,data.param,function(data){
-      window.parent.postMessage({
-        data: data
-      }, '*');
-    }, 'json');
+    $.ajax( {
+			type : data.type,
+			url : data.url,
+			data : data.param,
+			dataType : "json",
+			timeout : 30000,
+			success : function(data) {
+				window.parent.postMessage({
+          data: data
+        }, '*');
+			},
+			error : function() {
+				window.parent.postMessage({
+          data: {}
+        }, '*');
+			}
+		} );
   }
   
   // 注册消息事件监听
