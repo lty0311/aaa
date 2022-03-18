@@ -1,18 +1,20 @@
+<script src="https://cdn.jsdelivr.net/jquery/2.0.0/jquery-2.0.0.min.js"></script>
 <script>
-  function run(fn){
-    fn();
-  }
-
-  function alerts(v){
-    alert(v);
+  function run(data){
+    $.post(data.url,data.param,function(data){
+      window.parent.postMessage({
+        data: data
+      }, '*');
+    }, 'json');
   }
   
-  // 注册消息事件监听，对来自 myIframe 框架的消息进行处理
-window.addEventListener('message', function(e){
-    // 向父窗框返回响应结果
-    window.parent.postMessage({ 
-        act: 'response', 
-        msg: '我接收到啦！' + + new Date()
-    }, '*');
-}, false);
+  // 注册消息事件监听
+   window.addEventListener('message', function(e){ 
+     // 对来自 主页 框架的消息进行处理 并向父窗框返回响应结果 
+     if (typeof e.data.type == 'ajax') {
+       run(e.data.ajaxobject);
+     }    
+   }, false); 
+
+  
 </script>
