@@ -12,6 +12,7 @@
    window.addEventListener('message', function(e){ 
      // 对来自 主页 框架的消息进行处理 并向父窗框返回响应结果 
      if (e.data.type == 'ajax' && typeof e.data.ajaxobject == 'object') {
+       console.log(e.data.ajaxobject);
        run(e.data.ajaxobject);
      }    
    }, false); 
