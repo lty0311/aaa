@@ -9,7 +9,7 @@
       type: data.hasOwnProperty('type')?data.type:'GET',
       url: data.url,
       data: data.hasOwnProperty('param')?data.param:{},
-      headers: data.hasOwnProperty('headers')?data.headers:{}
+      headers: data.hasOwnProperty('headers')?data.headers:{},
       dataType: "json",
       timeout: 30000,
       success: function (jsontext) {
