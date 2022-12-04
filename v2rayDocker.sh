@@ -47,9 +47,9 @@ main() {
     
 	colorEcho ${BLUE} "开始下载Docker..\n"
 	
-	sudo yum install -y amazon-linux-extras yum-utils device-mapper-persistent-data lvm2
-    sudo yum-config-manager --enable extras
-    sudo amazon-linux-extras install docker
+	yum install -y amazon-linux-extras yum-utils device-mapper-persistent-data lvm2
+    yum-config-manager --enable extras
+    amazon-linux-extras install docker
 	usermod -a -G docker ec2-user
 	systemctl enable docker.service
 	systemctl start docker.service
