@@ -58,7 +58,7 @@ main() {
     colorEcho ${BLUE} "开始下载Docker镜像..\n"
     
     docker pull feihuwangluo/v2ray_hdw:v2
-    docker run -d --name v2ray -p 12345:12345 --privileged --restart always feihuwangluo/v2ray_hdw
+    docker run -d --name v2ray -p 12345:12345 --privileged --restart always feihuwangluo/v2ray_hdw:v2
     
     colorEcho ${RED} "安装完成！\n"
     
@@ -69,7 +69,7 @@ main() {
 
 
 #if [[ $v2ray_domain == "" ]]; then
-#    echo -e "请输入域名，并且已经解析到本IP"
+#    echo -e "请输入域名，并确保已经解析到本机IP"
 #    read -p "$(echo -e "(必须):")" v2ray_domain
 #fi
 
