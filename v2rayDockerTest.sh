@@ -82,10 +82,10 @@ main() {
     
     docker_is_install
     
-    if [[ $ISHAVEDOCKERn == 0 ]]; then
+    if [[ $ISHAVEDOCKER == 0 ]]; then
         yum install -y amazon-linux-extras yum-utils device-mapper-persistent-data lvm2
         yum-config-manager --enable extras
-        amazon-linux-extras install docker
+        amazon-linux-extras install -y docker
         usermod -a -G docker ec2-user
         systemctl enable docker.service
         systemctl start docker.service
